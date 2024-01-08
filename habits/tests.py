@@ -38,7 +38,7 @@ class HabitApiTestCase(APITestCase):
         )
 
         response = self.client.post(
-            '/create/',
+            '/habits/create/',
             headers=heard
         )
 
@@ -69,7 +69,7 @@ class HabitApiTestCase(APITestCase):
         }
 
         response = self.client.get(
-            '/list/',
+            '/habits/list/',
             headers=heard
         )
 
@@ -98,7 +98,7 @@ class HabitApiTestCase(APITestCase):
         }
 
         response = self.client.get(
-            f'/retrieve/{habit.id}/',
+            f'/habits/retrieve/{habit.id}/',
             headers=heard
         )
 
@@ -130,7 +130,7 @@ class HabitApiTestCase(APITestCase):
         }
 
         response = self.client.patch(
-            f'/update/{habit.id}/',
+            f'/habits/update/{habit.id}/',
             data=data,
             headers=heard
         )
@@ -165,7 +165,7 @@ class HabitApiTestCase(APITestCase):
         }
 
         response = self.client.delete(
-            f'/destroy/{habit.id}/',
+            f'/habits/destroy/{habit.id}/',
             headers=heard
         )
 

@@ -15,7 +15,8 @@ class HabitValidator:
         val1 = dict(value).get(self.field1)
         val2 = dict(value).get(self.field2)
         if val1 and val2:
-            raise ValidationError("Нельзя одновременно выбирать!")
+            raise ValidationError("Нельзя одновременно выбирать"
+                                  " связанную привычку и вознаграждение!")
 
 
 class TimeValidator:
@@ -43,7 +44,9 @@ class ConnectedHabitValidator:
         for i in filter_list:
             if val1 is not None:
                 if i['id'] == val1.id:
-                    raise ValidationError("Не рекомендуется так делать!")
+                    raise (ValidationError
+                           ("В связанные привычки могут попадать"
+                            " только привычки с признаком приятной привычки"))
 
 
 class NiceHabitValidator:
@@ -60,4 +63,6 @@ class NiceHabitValidator:
         val2 = dict(value).get(self.field2)
         val3 = dict(value).get(self.field3)
         if val1 is True and (val2 is not None or val3 is not None):
-            raise ValidationError("У приятной привычки это не может быть!")
+            raise (ValidationError
+                   ("У приятной привычки не может"
+                    " быть вознаграждения или связанной привычки"))

@@ -1,3 +1,5 @@
+import os
+
 from django.core.management import BaseCommand
 
 from users.models import User
@@ -11,6 +13,7 @@ class Command(BaseCommand):
             email='sashenka@yandex.ru',
             first_name='Admin',
             last_name='Adminov',
+            chat_id=os.getenv("CHAT_ID_ADMIN"),
             is_superuser=True,
             is_staff=True,
             is_active=True
