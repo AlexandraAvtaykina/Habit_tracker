@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEYS')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -92,6 +92,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('BASE_NAME'),
         'USER': os.getenv('BASE_USER'),
+        'PASSWORD': 'mysecretpassword',
+        'PORT': 5432,
+        'HOST': 'postrgeSQL',
     }
 }
 
@@ -180,7 +183,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 # URL-адрес брокера сообщений, Например, Redis,
 # который по умолчанию работает на порту 6379
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
