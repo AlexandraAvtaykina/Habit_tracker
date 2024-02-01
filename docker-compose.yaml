@@ -3,13 +3,17 @@ version: '3'
 services:
   redis:
     image: redis
+    env_file:
+      - .env
     ports:
       - '6380:6379'
 
   postrgeSQL:
     image: postgres:latest
+    env_file:
+      - .env
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD'),
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - pg_data:/var/lib/postgresql/data/pgdata
@@ -35,6 +39,8 @@ services:
         condition: service_healthy
 
   celery:
+    env_file:
+      - .env
     build: .
     tty: true
     command: celery -A config worker -l INFO
@@ -43,6 +49,8 @@ services:
       - django
 
   celery_beat:
+    env_file:
+      - .env
     build: .
     restart: on-failure
     tty: true
